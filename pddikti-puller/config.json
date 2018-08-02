@@ -1,0 +1,5 @@
+﻿{
+  "connection-string": "Server=103.66.199.203;Database=sindikker0529;Uid=root;Pwd=Adminpkm2018;MinimumPoolSize=50;MaximumPoolSize=500;Connection Timeout=30",
+  "pddikti-endpoint": "https://api.ristekdikti.go.id:8243/pddikti/0.3",
+  "pddikti-access-token": "d3f25dda-36dd-345c-89da-1473d5045f17"
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "pddikti-puller": {
+      "commandName": "Project",
+      "commandLineArgs": "--config=config.json --pull=akr-prodi --filter-pt=001002"
+    }
+  }
+}
