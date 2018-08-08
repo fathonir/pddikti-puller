@@ -9,7 +9,7 @@ namespace PDDikti.Models
     [Serializable]
     public class JenisKeluar
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Ket { get; set; }
     }
 }

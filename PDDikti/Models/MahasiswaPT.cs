@@ -18,13 +18,13 @@ namespace PDDikti.Models
         public Jenjang Jenjang_Didik { get; set; }
         public string NIM { get; set; }
         public DateTime Tgl_Masuk { get; set; }
-        public DateTime Tgl_Keluar { get; set; }
+        public DateTime? Tgl_Keluar { get; set; }
         public string Smt_Mulai { get; set; }
         public string Smt_Tempuh { get; set; }
         public float SKS { get; set; }
         public float IPK { get; set; }
         public string No_Ijazah { get; set; }
-        public DateTime Tgl_SK_Yudisium { get; set; }
+        public DateTime? Tgl_SK_Yudisium { get; set; }
         public string Status { get; set; }
         public JenisDaftar Jenis_Daftar { get; set; }
         public JenisKeluar Jenis_Keluar { get; set; }
