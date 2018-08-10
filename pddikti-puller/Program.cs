@@ -171,7 +171,7 @@ Contoh penggunaan :
             var connection = new MySqlConnection(Program.ConnectionString);
 
             if (isPullPerguruanTinggi)
-                PullPerguruanTinggiAsync(connection, pddiktiClient).GetAwaiter().GetResult();
+                PullPerguruanTinggiAsync(connection, pddiktiClient, filterPT).GetAwaiter().GetResult();
 
             if (isPullProgramStudi)
                 PullProgramStudiAsync(connection, pddiktiClient, filterPT).GetAwaiter().GetResult();
@@ -193,7 +193,7 @@ Contoh penggunaan :
             return 0;
         }
 
-        static async Task PullPerguruanTinggiAsync(IDbConnection connection, PDDiktiClient client)
+        static async Task PullPerguruanTinggiAsync(IDbConnection connection, PDDiktiClient client, string filterPT = "")
         {
             // inisialisasi variabel kebutuhan
             var page = 0;
@@ -204,10 +204,22 @@ Contoh penggunaan :
             // Daftar PT
             var ptList = new List<PerguruanTinggi>();
 
-            // Ambil untuk halaman pertama
-            Console.Write("{0} Ambil data PT dari Forlap ... ", DateTime.Now);
-            var firstResponse = await client.GetListPerguruanTinggiAsync(page, Program.perPage);
-            ptList.AddRange(firstResponse.Data);
+            IRestResponse<List<PerguruanTinggi>> firstResponse;
+
+            if (filterPT == "")
+            {
+                // Ambil untuk halaman pertama
+                Console.Write("{0} Ambil data PT dari Forlap ... ", DateTime.Now);
+                firstResponse = await client.GetListPerguruanTinggiAsync(page, Program.perPage);
+                ptList.AddRange(firstResponse.Data);
+            }
+            else
+            {
+                // Ambil untuk halaman pertama
+                Console.Write("{0} Ambil data PT {1} dari Forlap ... ", DateTime.Now, filterPT);
+                firstResponse = await client.GetListPerguruanTinggiAsync(page, Program.perPage, filterPT);
+                ptList.AddRange(firstResponse.Data);
+            }
 
             // Ambil jumlah data dan total halaman
             count = firstResponse.TotalCount();
@@ -541,6 +553,8 @@ Contoh penggunaan :
                 // Ambil untuk halaman pertama
                 Console.Write("{0} [{1}] Ambil data mahasiswa {2} {3} dari Forlap ... ", DateTime.Now, prodi.PT.Nama, prodi.Jenjang_Didik.Nama, prodi.Nama);
                 var firstResponse = await client.GetListMahasiswaAsync(prodi.PT.ID.ToString(), prodi.ID.ToString(), page, Program.perPage);
+                var responseContent = firstResponse.Content;
+
                 mahasiswaList.AddRange(firstResponse.Data);
 
                 // Ambil jumlah data dan total halaman

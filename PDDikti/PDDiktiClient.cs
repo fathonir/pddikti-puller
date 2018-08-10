@@ -34,6 +34,17 @@ namespace PDDikti
             return await this._restClient.ExecuteTaskAsync<List<PerguruanTinggi>>(request);
         }
 
+        public async Task<IRestResponse<List<PerguruanTinggi>>> GetListPerguruanTinggiAsync(int page, int perPage, string kodePT)
+        {
+            var resource = "pt/{id-pt}?page={page}&per-page={per-page}";
+            var request = new RestRequest(resource, Method.GET);
+            request.AddUrlSegment("id-pt", kodePT);
+            request.AddUrlSegment("page", page);
+            request.AddUrlSegment("per-page", perPage);
+
+            return await this._restClient.ExecuteTaskAsync<List<PerguruanTinggi>>(request);
+        }
+
         public async Task<IRestResponse<List<ProgramStudi>>> GetListProgramStudiAsync(Guid idPT, int page, int perPage)
         {
             var resource = "pt/{id-pt}/prodi?page={page}&per-page={per-page}";
